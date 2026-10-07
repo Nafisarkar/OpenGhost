@@ -7,9 +7,10 @@ const OpenAI = require('./openai');
 const Claude = require('./anthropic');
 const ChatGPT = require('./chatgpt');
 const OpenRouter = require('./openrouter');
+const CommandCode = require('./commandcode');
 
 const runs = new Map();
-const ENGINES = { openai: OpenAI, chatgpt: OpenAI, anthropic: Claude, openrouter: OpenRouter };
+const ENGINES = { openai: OpenAI, chatgpt: OpenAI, anthropic: Claude, openrouter: OpenRouter, commandcode: CommandCode };
 const PROVIDERS = new Set(Object.keys(ENGINES));
 
 const engine = provider => ENGINES[provider];

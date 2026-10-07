@@ -2,9 +2,9 @@
 'use strict';
 
 const STORAGE = { effort: 'deepseek.effort', mode: 'openghost.mode', model: 'openghost.model', catalog: 'openghost.catalog' };
-const KEYS = { openai: 'openai.apiKey', anthropic: 'anthropic.apiKey', deepseek: 'deepseek.apiKey', openrouter: 'openrouter.apiKey' };
+const KEYS = { openai: 'openai.apiKey', anthropic: 'anthropic.apiKey', deepseek: 'deepseek.apiKey', openrouter: 'openrouter.apiKey', commandcode: 'commandcode.apiKey' };
 // The order providers appear in, in the settings and in the model picker.
-const ORDER = ['chatgpt', 'openai', 'anthropic', 'deepseek', 'openrouter'];
+const ORDER = ['chatgpt', 'openai', 'anthropic', 'deepseek', 'openrouter', 'commandcode'];
 // The provider the app starts with: the settings ask for its key when nothing is connected, and new chats take its first
 // model until the user picks another.
 const FIRST_PROVIDER = 'deepseek';
@@ -18,6 +18,7 @@ const LINKS = {
  anthropic: ['https://console.anthropic.com/settings/keys', 'console.anthropic.com'],
  deepseek: ['https://platform.deepseek.com/api_keys', 'platform.deepseek.com'],
  openrouter: ['https://openrouter.ai/keys', 'openrouter.ai'],
+ commandcode: ['https://commandcode.ai/settings/keys', 'commandcode.ai'],
 };
 const PLACEHOLDERS = { anthropic: 'sk-ant-…', openrouter: 'sk-or-…' };
 const MODES = ['ask', 'auto', 'full'];
@@ -380,6 +381,7 @@ class Settings {
    section('anthropic', 'Anthropic', keyRow('anthropic')),
    section('deepseek', 'DeepSeek', keyRow('deepseek')),
    section('openrouter', 'OpenRouter', keyRow('openrouter')),
+   section('commandcode', 'Command Code', keyRow('commandcode')),
   ].join('');
   this.inputs = {};
   for (const input of this.list.querySelectorAll('.settings-key')) {

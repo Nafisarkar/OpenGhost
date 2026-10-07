@@ -7,7 +7,7 @@ const bridge = window.openghost?.llm || null;
 const listeners = new Map();
 bridge?.onEvent(data => listeners.get(data.id)?.(data));
 
-const NAMES = { deepseek: 'DeepSeek', openai: 'OpenAI', chatgpt: 'ChatGPT', anthropic: 'Anthropic', openrouter: 'OpenRouter' };
+const NAMES = { deepseek: 'DeepSeek', openai: 'OpenAI', chatgpt: 'ChatGPT', anthropic: 'Anthropic', openrouter: 'OpenRouter', commandcode: 'Command Code' };
 
 class ProviderError extends Error {
  constructor(message, status = 0) {
@@ -22,6 +22,7 @@ function explain(provider, { status = 0, code = '', message = '' }) {
  if (code === 'network') return I18n.t('error.connect', { provider: name });
  if (status === 401) return I18n.t(provider === 'chatgpt' ? 'error.signin' : 'error.key', { provider: name });
  if (status === 402 || code === 'insufficient_quota' || code === 'billing_error') return I18n.t('error.quota', { provider: name });
+ if (code === 'upgrade_required') return I18n.t('error.upgrade', { provider: name });
  if (status === 429) return I18n.t('error.rate', { provider: name });
  if (status >= 500) return I18n.t('error.server', { provider: name });
  return message || I18n.t('error.statusOf', { provider: name, status });
